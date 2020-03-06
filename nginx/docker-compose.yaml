@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  reverse:
+    container_name: nginx
+    hostname: nginx
+    networks:
+      - pinet
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /data/nginx/config:/etc/nginx
+      - /data/nginx/ssl-private:/etc/ssl/private
+      - /mnt/ssd:/ssd
+    restart: unless-stopped
+
+
+networks:
+  pinet:
+    external: true

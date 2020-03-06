@@ -1,0 +1,22 @@
+version: "2"
+services:
+  deluge:
+    image: linuxserver/deluge
+    container_name: deluge
+    networks:
+      - pinet
+        #network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+      - UMASK_SET=022 #optional
+      - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - /data/deluged/config:/config
+      - /mnt/ssd/downloads:/downloads
+    restart: unless-stopped
+
+networks:
+  pinet:
+    external: true
